@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.LTC2" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/uni_blue</item>
+        <item name="colorPrimaryVariant">@color/uni_blue_alt</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/uni_blue_alt</item>
+        <item name="colorSecondaryVariant">@color/uni_blue_alt</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Customize your theme here. -->
+        <item name="materialAlertDialogTheme">@style/Theme.LTC2.Dialog</item>
+        <item name="toolbarStyle">@style/Theme.LTC2.Toolbar</item>
+    </style>
+
+    <style name="Theme.LTC2.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="background">@color/uni_blue</item>
+        <item name="android:background">@color/uni_blue</item>
+    </style>
+
+    <style name="Theme.LTC2.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/Theme.LTC2.Dialog.Buttons</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Theme.LTC2.Dialog.Buttons</item>
+    </style>
+</resources>

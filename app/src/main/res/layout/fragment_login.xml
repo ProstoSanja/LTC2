@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/login_guid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="username"
+        android:inputType="text"
+        android:hint="GUID"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="password"
+        android:inputType="textPassword"
+        android:hint="password"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_submit"
+        android:text="login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/students_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/students_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/student_scan_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="scan barcode"/>
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
