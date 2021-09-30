@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -31,6 +32,7 @@ class StudentsAdapter(private var dataSet: List<StudentResponse>,
         val root: View = view
         val name: AppCompatTextView = view.findViewById(R.id.student_name)
         val checkbox: MaterialCheckBox = view.findViewById(R.id.student_checkbox)
+        val imageMissingLongTime: ImageView = view.findViewById(R.id.student_missing_long_time)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -42,6 +44,7 @@ class StudentsAdapter(private var dataSet: List<StudentResponse>,
         val student = dataSet[position]
         viewHolder.name.text = student.name
         viewHolder.checkbox.isChecked = student.attendedToday
+        viewHolder.imageMissingLongTime.visibility = if (student.attendedPastTwoWeeks) View.GONE else View.VISIBLE
         viewHolder.checkbox.setOnClickListener { view ->
             val checkbox = (view as AppCompatCheckBox)
             val checked = checkbox.isChecked

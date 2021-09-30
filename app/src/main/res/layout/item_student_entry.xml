@@ -18,7 +18,18 @@
         android:id="@+id/student_name"
         android:textSize="20sp"
         android:layout_gravity="start|center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:id="@+id/student_missing_long_time"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel_outline"
+        android:tooltipText="Student has not attended in past 2 weeks"/>
 
 </LinearLayout>

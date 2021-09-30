@@ -31,6 +31,10 @@ class MainViewModel : ViewModel() {
         MutableLiveData<List<StudentResponse>>()
     }
 
+    val error: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
     fun handleApiLogin(loginResponse: LoginResponse) {
         if (loginResponse.isTutor) {
             authentificated.value = true
@@ -62,6 +66,7 @@ class MainViewModel : ViewModel() {
     fun handleApiError(t: Throwable) {
         t.printStackTrace()
         Log.e("TAG", t.message.toString())
+        error.value = t.message.toString()
     }
 
 }
