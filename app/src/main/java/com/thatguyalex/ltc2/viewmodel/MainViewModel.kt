@@ -8,6 +8,7 @@ import com.thatguyalex.ltc2.api.SocsApiManager
 import com.thatguyalex.ltc2.api.classes.GroupResponse
 import com.thatguyalex.ltc2.api.classes.LoginResponse
 import com.thatguyalex.ltc2.api.classes.StudentResponse
+import retrofit2.HttpException
 
 class MainViewModel : ViewModel() {
 
@@ -65,8 +66,11 @@ class MainViewModel : ViewModel() {
 
     fun handleApiError(t: Throwable) {
         t.printStackTrace()
-        Log.e("TAG", t.message.toString())
-        error.value = t.message.toString()
+        var message = t.message.toString()
+        if (t is HttpException) {
+            message = t.response()?.errorBody()?.string() ?: message
+        }
+        error.value = message
     }
 
 }

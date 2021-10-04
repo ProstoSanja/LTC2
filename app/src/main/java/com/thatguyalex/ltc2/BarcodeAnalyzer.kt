@@ -9,6 +9,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import java.util.concurrent.atomic.AtomicReference
 
 class BarcodeAnalyzer(
     val callback: (barcode: String) -> Unit
@@ -20,7 +21,7 @@ class BarcodeAnalyzer(
             .build()
     )
 
-    private var lastDetectedCode = ""
+    private var lastDetectedCode = AtomicReference("")
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun analyze(imageProxy: ImageProxy) {
@@ -29,19 +30,24 @@ class BarcodeAnalyzer(
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
             scanner.process(image)
                 .addOnSuccessListener { barcodes ->
-                    for (barcode in barcodes) {
-                        if (barcode.rawValue != null && lastDetectedCode != barcode.rawValue) {
-                            lastDetectedCode = barcode.rawValue!!
-                            callback(barcode.rawValue!!)
+                    if (barcodes.size > 0) {
+                        val barcode = barcodes[0]
+                        if (barcode.rawValue != null && barcode.rawValue!!.length == 14) {
+                            val barcodeValue = barcode.rawValue!!
+                            if (lastDetectedCode.getAndSet(barcodeValue) != barcodeValue) {
+                                Log.w("TAG3", "found new barcode " + barcode.rawValue!!)
+                                callback(barcode.rawValue!!)
+                            }
                         }
                     }
                 }
                 .addOnFailureListener {
-                    Log.w("TAG2", "FOUND NOTHING")
+//                    Log.w("TAG2", "FOUND NOTHING")
                 }
                 .addOnCompleteListener {
                     imageProxy.close()
                 }
+            Thread.sleep(100)
         }
     }
 }
