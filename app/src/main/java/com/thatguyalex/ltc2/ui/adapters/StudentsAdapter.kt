@@ -19,7 +19,7 @@ import com.thatguyalex.ltc2.api.classes.StudentResponse
 
 class StudentsAdapter(private var dataSet: List<StudentResponse>,
                       private val context: Context,
-                      private val setAttendanceCallback: (barcode: String) -> Unit,
+                      private val setAttendanceCallback: (barcode: String, reportError: Boolean) -> Unit,
                       private val deleteAttendanceCallback: (barcode: String) -> Unit
 ) : RecyclerView.Adapter<StudentsAdapter.ViewHolder>() {
 
@@ -50,7 +50,7 @@ class StudentsAdapter(private var dataSet: List<StudentResponse>,
             val checked = checkbox.isChecked
             showDialog(checked, { _,_ ->
                 if (checked) {
-                    setAttendanceCallback(student.barcode)
+                    setAttendanceCallback(student.barcode, true)
                 } else {
                     deleteAttendanceCallback(student.barcode)
                 }

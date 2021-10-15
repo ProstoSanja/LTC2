@@ -51,13 +51,13 @@ class SocsApiManager(private val model: MainViewModel) {
             .subscribe(model::handleStudentGroup, model::handleApiError)
     }
 
-    fun submitAttendance(barcode: String, courseName: String, courseId: Int, callback: () -> Unit) {
+    fun submitAttendance(barcode: String, courseName: String, courseId: Int, reportError : Boolean, callback: () -> Unit) {
         val time = Instant.now().atZone(ZoneOffset.UTC)
 
         socsApi.submitAttendance(SubmitAttendanceRequest(barcode, time.year, time.monthValue, time.dayOfMonth, time.hour, time.minute, courseName, courseId, model.guid.value!!))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(callback, model::handleApiError)
+            .subscribe(callback, if (reportError) model::handleApiError else { _  -> })
     }
 
     fun deleteAttendance(barcode: String, courseName: String, courseId: Int, callback: () -> Unit) {

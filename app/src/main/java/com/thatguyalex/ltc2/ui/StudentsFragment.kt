@@ -1,14 +1,9 @@
 package com.thatguyalex.ltc2.ui
 
 import android.Manifest
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -79,8 +74,8 @@ class StudentsFragment : Fragment(R.layout.fragment_students) {
         super.onDestroyView()
     }
 
-    fun setAttendance(barcode: String) {
-        model.socsApiManager.submitAttendance(barcode, model.selectedGroup.value!!.courseName, model.selectedGroup.value!!.courseId) {
+    fun setAttendance(barcode: String, reportError : Boolean) {
+        model.socsApiManager.submitAttendance(barcode, model.selectedGroup.value!!.courseName, model.selectedGroup.value!!.courseId, reportError) {
             attendanceCallback(barcode, true)
         }
     }
@@ -92,7 +87,9 @@ class StudentsFragment : Fragment(R.layout.fragment_students) {
     }
 
     fun attendanceCallback(barcode: String, created: Boolean) {
-        Snackbar.make(requireView(), (if (created) "Registered attendance: " else "Deleted attendance: ") + barcode, BaseTransientBottomBar.LENGTH_SHORT).show()
+        val student = model.selectedGroupStudentsList.value?.find { it.barcode == barcode }
+        val callbackValue = student?.name ?: barcode
+        Snackbar.make(requireView(), (if (created) "Registered attendance: " else "Deleted attendance: ") + callbackValue, BaseTransientBottomBar.LENGTH_SHORT).show()
     }
 
     private fun startCamera() {

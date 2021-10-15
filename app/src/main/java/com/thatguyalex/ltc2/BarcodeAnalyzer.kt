@@ -12,7 +12,7 @@ import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.atomic.AtomicReference
 
 class BarcodeAnalyzer(
-    val callback: (barcode: String) -> Unit
+    val callback: (barcode: String, reportError: Boolean) -> Unit
 ) : ImageAnalysis.Analyzer {
 
     private var scanner : BarcodeScanner = BarcodeScanning.getClient(
@@ -36,7 +36,7 @@ class BarcodeAnalyzer(
                             val barcodeValue = barcode.rawValue!!
                             if (lastDetectedCode.getAndSet(barcodeValue) != barcodeValue) {
                                 Log.w("TAG3", "found new barcode " + barcode.rawValue!!)
-                                callback(barcode.rawValue!!)
+                                callback(barcode.rawValue!!, false)
                             }
                         }
                     }
