@@ -1,12 +1,10 @@
 package com.thatguyalex.ltc2.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.thatguyalex.ltc2.R
 import com.thatguyalex.ltc2.viewmodel.MainViewModel

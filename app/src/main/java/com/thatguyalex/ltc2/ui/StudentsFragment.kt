@@ -60,10 +60,10 @@ class StudentsFragment : Fragment(R.layout.fragment_students) {
         }
 
         model.selectedGroupStudentsList.observe(viewLifecycleOwner){
-            loadingBar.visibility = View.GONE
             if (it.isEmpty()) {
                 return@observe
             }
+            loadingBar.visibility = View.GONE
             adapter.updateDataSet(it)
         }
 
